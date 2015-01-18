@@ -15,14 +15,14 @@ import ui.ExchangeDialog;
 public class ApplicationFrame extends JFrame {
     
     private final CurrencySet currencySet;
-    private final Map<String,ActionListener> receivers;
+    private final Map<String,ActionListener> listener;
     private ExchangeDialog exchangeDialog;
 
     public ApplicationFrame(CurrencySet currencySet) {
         super("Money Calculator");
         this.setLocationRelativeTo(null);
         this.currencySet = currencySet;
-        this.receivers = new HashMap<>();       
+        this.listener = new HashMap<>();       
         this.setSize(300,150);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.createComponents();
@@ -30,7 +30,7 @@ public class ApplicationFrame extends JFrame {
     }
 
     public void register(String command, ActionListener actionListener) {
-        this.receivers.put(command, actionListener);
+        this.listener.put(command, actionListener);
     }
 
     public ExchangeDialog getDialog() {
@@ -58,7 +58,7 @@ public class ApplicationFrame extends JFrame {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                receivers.get(text).actionPerformed(event);
+                listener.get(text).actionPerformed(event);
             }
         };
     }
